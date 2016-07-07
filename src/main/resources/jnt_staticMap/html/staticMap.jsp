@@ -45,6 +45,9 @@
                 <c:set var="markers" value="size:${props['j:markerSize']}|${markers}"/>
             </c:if>
             <c:param name="markers" value="${markers}"/>
+            <c:if test="${not empty locationMapKey}">
+                <c:param name="key" value="${locationMapKey}"/>
+            </c:if>
         </c:url>
         
         <p class="location-static-map">

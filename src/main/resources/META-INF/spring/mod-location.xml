@@ -13,4 +13,11 @@
             </map>
         </property>
     </bean>
+
+    <bean class="org.jahia.modules.location.MapAttributesFilter">
+        <property name="priority" value="31"/>
+        <property name="description" value="Location module: Inject maps parameter in request to be used by map .jsp"/>
+        <property name="googleMapApiKey" value="${jahia.modules.location.attr.map.key:}"/>
+        <property name="applyOnNodeTypes" value="jnt:map,jnt:staticMap"/>
+    </bean>
 </beans>

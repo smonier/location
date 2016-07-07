@@ -10,7 +10,11 @@
     <c:set var="props" value="${currentNode.propertiesAsString}"/>
     <c:if test="${!renderContext.editMode}">
 	    <c:set var="targetProps" value="${bindedComponent.propertiesAsString}"/>
-	    <template:addResources type="javascript" resources="http://maps.google.com/maps/api/js?sensor=false&amp;language=${currentResource.locale.language}"/>
+		<c:if test="${not empty locationMapKey}">
+			<c:set var="mapKey" value="&amp;key=${locationMapKey}"/>
+		</c:if>
+	    <template:addResources type="javascript"
+							   resources="http://maps.google.com/maps/api/js?sensor=false&amp;language=${currentResource.locale.language}${mapKey}"/>
 	    <template:addResources type="javascript" resources="jquery.min.js"/>
 	    <template:addResources type="javascript" resources="jquery.jahia-googlemaps.js"/>
 	
