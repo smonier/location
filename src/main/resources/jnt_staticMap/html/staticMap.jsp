@@ -14,7 +14,7 @@
             <h3>${fn:escapeXml(props['jcr:title'])}</h3>
         </c:if>
     
-        <c:url var="mapUrl" value="http://maps.google.com/maps/api/staticmap">
+        <c:url var="mapUrl" value="https://maps.google.com/maps/api/staticmap">
             <c:param name="sensor" value="false"/>
             <c:if test="${not empty props['j:zoom'] && props['j:zoom'] != 'auto'}">
                 <c:param name="zoom" value="${props['j:zoom']}"/>
