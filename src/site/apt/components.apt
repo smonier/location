@@ -7,8 +7,8 @@ Geotagging and map components
     either via latitude/longitude or using postal address. Corresponding node type is
     <<<jnt:location>>>.
 
-  * <Map> - a binded component that renders the interactive map of the target
-    location or geotagged content. Corresponds to a node type <<<jnt:map>>>.
+  * <Weather Forecast> - a binded component that renders the weather forecast of the target
+    location or geotagged content. Corresponds to a node type <<<jnt:locWeatherForecast>>>.
 
   * <Map (static)> - component that renders the static map (static image)
     of the bound target location or geotagged content.
@@ -37,10 +37,10 @@ Geotagging and map components
   of coordinates for an object or by using a postal address.
   
   There are several online services allowing you to determine geographical
-  coordinates for a location, including Google's
-  {{{http://gmaps-samples.googlecode.com/svn/trunk/geocoder/singlegeocode.html}Geocoding Utility}},
-  {{{http://itouchmap.com/latlong.html}iTouchMap.com}},
-  {{{http://www.findlatitudeandlongitude.com/}www.findlatitudeandlongitude.com}} and others.
+  coordinates for a location, including:
+  {{{https://locationiq.com/}Geocoding Utility}},
+  {{{https://www.mapbox.com/}https://www.openstreetmap.org/}},
+  {{{https://openweathermap.org/}Weather Forecast}} and others.
   
   The second option is to specify the postal address of a point. In such case the geocodding
   will be done using {{{http://code.google.com/apis/maps/documentation/javascript/}Google Maps JavaScript API V3}}

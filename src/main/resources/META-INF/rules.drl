@@ -22,6 +22,7 @@ rule "Geocode location"
         Location data has been changed on a node
         Automatic geocoding is enabled on the node 
     then
+       Log "------ CHANGE IN LOCATION ---------"
        Log "Location data has changed on " + node.getPath() + ". Will try to detect the latitude/longitude automatically" 
        Geocode the node
 end

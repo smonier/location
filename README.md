@@ -4,10 +4,17 @@
 
 Location module
 ======================
-Provide location components using google map API.
+Provide location components using: 
 
-For specifying the google API key to be used for maps, you can specify in jahia.properties this property:
-jahia.modules.location.attr.map.key=THE_KEY
+**locationIQ API** for forward geolocalisation (get Lat & Lon from address)
+jahia.modules.location.attr.locationiq.key=THE_KEY (jahia.properties)
+
+**openStreetMap and MapBox** for maps
+jahia.modules.location.attr.mapbox.token=THE_TOKEN (jahia.properties)
+
+**openWeatherMap** for Weather Forecast
+jahia.modules.location.attr.openWeatherMap.key=THE_KEY (jahia.properties)
+
 
 ## Open-Source
 

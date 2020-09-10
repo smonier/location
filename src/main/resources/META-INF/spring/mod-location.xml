@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean class="org.jahia.services.content.rules.ModuleGlobalObject">
         <property name="globalRulesObject">
             <map>
                 <entry key="locationService">
                     <bean class="org.jahia.modules.location.LocationService">
+
+                        <property name="locationIQApiKey" value="${jahia.modules.location.attr.locationiq.key:}"/>
+
                     </bean>
                 </entry>
             </map>
@@ -16,8 +19,22 @@
 
     <bean class="org.jahia.modules.location.MapAttributesFilter">
         <property name="priority" value="31"/>
-        <property name="description" value="Location module: Inject maps parameter in request to be used by map .jsp"/>
-        <property name="googleMapApiKey" value="${jahia.modules.location.attr.map.key:}"/>
-        <property name="applyOnNodeTypes" value="jnt:map,jnt:staticMap"/>
+        <property name="description" value="Location module: Inject locationIQ key in request to be used by map .jsp"/>
+        <property name="locationIQApiKey" value="${jahia.modules.location.attr.locationiq.key:}"/>
+        <property name="applyOnNodeTypes" value="jnt:staticMap"/>
+    </bean>
+
+    <bean class="org.jahia.modules.location.MapBoxTokenFilter">
+        <property name="priority" value="32"/>
+        <property name="description" value="Location module: Inject MApBox token in request to be used by map .jsp"/>
+        <property name="mapBoxToken" value="${jahia.modules.location.attr.mapbox.token:}"/>
+        <property name="applyOnNodeTypes" value="jnt:staticMap"/>
+    </bean>
+
+    <bean class="org.jahia.modules.location.OpenWeatherMapFilter">
+        <property name="priority" value="33"/>
+        <property name="description" value="Location module: Inject MApBox token in request to be used by map .jsp"/>
+        <property name="openWeatherMapKey" value="${jahia.modules.location.attr.openWeatherMap.key:}"/>
+        <property name="applyOnNodeTypes" value="jnt:locWeatherForecast"/>
     </bean>
 </beans>

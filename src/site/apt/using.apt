@@ -1,73 +1,33 @@
 Usage
 
-  Jahia uses the
-  {{{http://code.google.com/apis/maps/documentation/javascript/}Google Maps JavaScript API V3}}
-  for geocodding and interactive map rendering and the Google
-  {{{http://code.google.com/apis/maps/documentation/staticmaps/}Static Maps API V2}} for 
+  Location Module uses the
+  {{{https://docs.mapbox.com/mapbox-gl-js/api/}MapBox JavaScript API}}
+  and for interactive map rendering and the locationIq for forward and reverse geocodding
+  {{{https://locationiq.com/sandbox/geocoding/forward}https://locationiq.com/sandbox/geocoding/reverse} LocationIQ} for
   static map rendering.
-  
-  We have provided a jQuery-based plugin (<<<jquery.jahia-googlemaps.js>>>) for easy integration
-  of map objects into templates.
 
   Here is an example of rendering a map object for a location, defined by (latitude, longitude)
   pair:
   
 +------------------------------------------------
 ...
-  <template:addResources type="javascript" resources="http://maps.google.com/maps/api/js?sensor=false&amp;language=${currentResource.locale.language}"/>
-  <template:addResources type="javascript" resources="jquery.min.js"/>
-  <template:addResources type="javascript" resources="jquery.jahia-googlemaps.js"/>
+var mymap = L.map('mapid').setView([-2.258,18.258], 17);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 20,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: '${YOUR_TOKEN}'
+        }).addTo(mymap);
 
-    <template:addResources>
-        <script type="text/javascript">
-        $(document).ready(function() {
-            $("#map-placeholder").googleMaps({
-                markers:[{
-                    latitude: '46.1893',
-                    longitude: '6.12831',
-                }]
-            });
-        });
-        </script>
-    </template:addResources>
-    
-    <div id="map-map-placeholder" style="width:500px; height:300px"></div>
+        var marker = L.marker([-2.258,18.258]).addTo(mymap);
+        marker.bindPopup("Very nice to visit").openPopup();
 ...
 +------------------------------------------------
    
-  In a similar way a postal address can be used to define a location point.
-  This will lead to a geocoding first, i.e. a request is made using Google's API
-  to retrieve the geo coordinates for the specified address. 
+  This only works with Latitude and Longitude Coordinates
 
 +------------------------------------------------
-...
-	$("#map-placeholder").googleMaps({
-    	markers:[{
-        	address: '9, rte des Jeunes, 1227, Acacias, Switzerland'
-        }]
-    });
-...
-+------------------------------------------------
 
-  Additionally a title, and info content and a custom icon can be specified:
-
-+------------------------------------------------
-...
-	$("#map-placeholder").googleMaps({
-    	markers:[{
-        	address: '9, rte des Jeunes, 1227, Acacias, Switzerland',
-        	icon: 'icons/home.png',
-        	title: 'Jahia Corporate Headquarter',
-        	info: '<strong>Jahia Corporate Headquarter</strong><br/>'
-        		+ '9, rte des Jeunes'
-        		+ '1227 Acacias'
-        		+ 'Switzerland'
-        }]
-    });
-...
-+------------------------------------------------
-
-  This will be rendered as shown below:
-
-[./images/customization.png] Marker customization
 

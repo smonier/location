@@ -50,28 +50,22 @@ import org.jahia.services.render.filter.AbstractFilter;
 import org.jahia.services.render.filter.RenderChain;
 
 /**
- * Inject google maps key into request to be used client side by jsp.
- * Created by jkevan on 07/07/2016.
+ * Inject mapbox key into request to be used client side by jsp.
+ * Created by smonier on 08/09/2020.
  */
-public class MapAttributesFilter extends AbstractFilter {
-    private static final String LOCATION_MAP_KEY_ATTR = "locationMapKey";
-    private String locationIQApiKey;
+public class MapBoxTokenFilter extends AbstractFilter {
+    private static final String LOCATION_MAPBOX_TOKEN_ATTR = "locationMapBoxToken";
+    private String mapBoxToken;
 
     @Override
     public String prepare(RenderContext renderContext, Resource resource, RenderChain chain) throws Exception {
-        if (StringUtils.isNotEmpty(locationIQApiKey) && renderContext.getRequest().getAttribute(LOCATION_MAP_KEY_ATTR) == null) {
-            renderContext.getRequest().setAttribute(LOCATION_MAP_KEY_ATTR, locationIQApiKey);
+        if (StringUtils.isNotEmpty(mapBoxToken) && renderContext.getRequest().getAttribute(LOCATION_MAPBOX_TOKEN_ATTR) == null) {
+            renderContext.getRequest().setAttribute(LOCATION_MAPBOX_TOKEN_ATTR, mapBoxToken);
         }
         return null;
     }
 
-    public void setLocationIQApiKey(String locationIQApiKey) {
-        this.locationIQApiKey = locationIQApiKey;
-    }
-
-    public String getLocationIQApiKey() {
-        return locationIQApiKey;
+    public void setMapBoxToken(String mapBoxToken) {
+        this.mapBoxToken = mapBoxToken;
     }
 }
-
-

@@ -44,7 +44,8 @@
         please contact the sales department at sales@jahia.com.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.jahia.modules</groupId>
@@ -57,35 +58,14 @@
   <name>Jahia Location</name>
   <description>These are the custom module (Jahia Location) for running on a Jahia server.</description>
   <scm>
-    <connection>scm:git:git@github.com:Jahia/location.git</connection>
-    <developerConnection>scm:git:git@github.com:Jahia/location.git</developerConnection>
+    <connection>scm:git:https://github.com/Jahia/location.git</connection>
+    <developerConnection>scm:git:https://github.com/Jahia/location.git</developerConnection>
     <url>scm:git:git@github.com:Jahia/location.git</url>
-    <tag>HEAD</tag>
   </scm>
-
   <properties>
+    <jahia-module-signature>MC0CFHJZfFNl3o0ZH8jJeGpzkrF5pwX2AhUAkATMQpt0KNZDmINw67ZQIrvyHQE=</jahia-module-signature>
     <require-capability>osgi.extender;filter:="(osgi.extender=org.jahia.bundles.blueprint.extender.config)"</require-capability>
-    <jahia-module-signature>MCwCFD203/hsXQLp+CQQnJQENHImFxUuAhRTIauFzrVVpK54F4TghD7FGbwe5w==</jahia-module-signature>
   </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.google.code.geocoder-java</groupId>
-      <artifactId>geocoder-java</artifactId>
-      <version>0.9</version>
-      <classifier>jdk5</classifier>
-      <exclusions>
-        <exclusion>
-          <artifactId>commons-lang</artifactId>
-          <groupId>commons-lang</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-httpclient</artifactId>
-          <groupId>commons-httpclient</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-  </dependencies>
   <repositories>
     <repository>
       <releases>

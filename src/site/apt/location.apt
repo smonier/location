@@ -3,7 +3,7 @@ Jahia Location
 * Overview
 
   This module contains components and functionality for defining locations
-  and displaying them on a map using {{{http://code.google.com/apis/maps/index.html} Google Maps API}}.
+  and displaying them on a map using {{{https://www.openstreetmap.org/} MApBox API}}.
   
   Following sections describe module features in more details:
 

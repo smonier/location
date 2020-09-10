@@ -43,48 +43,102 @@
  */
 package org.jahia.modules.location;
 
-import com.google.code.geocoder.Geocoder;
+/*import com.google.code.geocoder.Geocoder;
 import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.GeocodeResponse;
 import com.google.code.geocoder.model.GeocoderRequest;
-import com.google.code.geocoder.model.GeocoderResult;
+import com.google.code.geocoder.model.GeocoderResult;*/
 import org.drools.core.spi.KnowledgeHelper;
 import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.rules.AddedNodeFact;
 
 import javax.jcr.RepositoryException;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.nio.charset.Charset;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class LocationService {
 
-    public void geocodeLocation(AddedNodeFact node, KnowledgeHelper drools) throws RepositoryException {
-        final Geocoder geocoder = new Geocoder();
+    private String locationIQApiKey;
+
+    public void geocodeLocation(AddedNodeFact node, KnowledgeHelper drools) throws RepositoryException,IOException, JSONException {
+       // final Geocoder geocoder = new Geocoder();
+
         JCRNodeWrapper nodeWrapper = node.getNode();
+        String json;
 
         StringBuilder address = new StringBuilder();
         if (nodeWrapper.hasProperty("j:street")) {
             address.append(nodeWrapper.getProperty("j:street").getString());
         }
         if (nodeWrapper.hasProperty("j:zipCode")) {
-            address.append(" ").append(nodeWrapper.getProperty("j:zipCode").getString());
+            address.append(", ").append(nodeWrapper.getProperty("j:zipCode").getString());
         }
         if (nodeWrapper.hasProperty("j:town")) {
-            address.append(" ").append(nodeWrapper.getProperty("j:town").getString());
+            address.append(", ").append(nodeWrapper.getProperty("j:town").getString());
         }
         if (nodeWrapper.hasProperty("j:country")) {
-            address.append(" ").append(nodeWrapper.getProperty("j:country").getString());
+            address.append(", ").append(nodeWrapper.getProperty("j:country").getValue());
         }
         if (!nodeWrapper.isNodeType("jnt:location") && !nodeWrapper.isNodeType("jmix:geotagged")) {
             nodeWrapper.addMixin("jmix:geotagged");
         }
         if (address.length() > 0) {
-            GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(address.toString()).getGeocoderRequest();
+         /*   GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(address.toString()).getGeocoderRequest();
             GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
-            List<GeocoderResult> results = geocoderResponse.getResults();
-            if (results.size() > 0) {
-                nodeWrapper.setProperty("j:latitude", results.get(0).getGeometry().getLocation().getLat().toString());
-                nodeWrapper.setProperty("j:longitude", results.get(0).getGeometry().getLocation().getLng().toString());
+            List<GeocoderResult> results = geocoderResponse.getResults();*/
+
+            System.out.println("-------------------------------->"+address.toString());
+            try {
+                json = readJsonFromUrl("https://eu1.locationiq.com/v1/search.php?key="+ locationIQApiKey +"&q=" + address.toString() + "&format=json");
+                System.out.println(json);
+
+
+                JSONArray jsonArray = new JSONArray(json);
+                for (int count = 0; count<1; count++){
+                    JSONObject jsonObject = jsonArray.getJSONObject(count);
+                    nodeWrapper.setProperty("j:latitude", jsonObject.get("lat").toString());
+                    nodeWrapper.setProperty("j:longitude", jsonObject.get("lon").toString());
+                    nodeWrapper.setProperty("displayName", jsonObject.get("display_name").toString());
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
         }
+    }
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
+    }
+
+    public static String readJsonFromUrl(String url) throws IOException, JSONException {
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+          //  JSONObject json = new JSONObject(jsonText);
+            return jsonText;
+        } finally {
+            is.close();
+        }
+    }
+
+    public void setLocationIQApiKey(Object locationIQApiKey) {
+        this.locationIQApiKey = (String) locationIQApiKey;
     }
 }
