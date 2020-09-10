@@ -75,7 +75,7 @@
 
                     <div class="stats-container">
                         <div class="stats">
-                            <h4 id="day-${uuid}1">235</h4>
+                            <h4 id="day1-${uuid}">235</h4>
                             <p>
 
                                 <img id="iconow1-${uuid}" height="40px" src="#"/>
