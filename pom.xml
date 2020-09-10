@@ -58,9 +58,9 @@
   <name>Jahia Location</name>
   <description>These are the custom module (Jahia Location) for running on a Jahia server.</description>
   <scm>
-    <connection>scm:git:https://github.com/Jahia/location.git</connection>
-    <developerConnection>scm:git:https://github.com/Jahia/location.git</developerConnection>
-    <url>scm:git:git@github.com:Jahia/location.git</url>
+    <connection>scm:git:https://github.com/smonier/location.git</connection>
+    <developerConnection>scm:git:https://github.com/smonier/location.git</developerConnection>
+    <url>scm:git:git@github.com:smonier/location.git</url>
   </scm>
   <properties>
     <jahia-module-signature>MC0CFHJZfFNl3o0ZH8jJeGpzkrF5pwX2AhUAkATMQpt0KNZDmINw67ZQIrvyHQE=</jahia-module-signature>

@@ -20,7 +20,7 @@
     <c:if test="${not empty props['jcr:title']}">
         <h3>${fn:escapeXml(props['jcr:title'])}</h3>
     </c:if>
-
+    <c:set var="uuid" value="${targetProps['jcr:uuid']}"/>
 
         <c:if test="${not empty props['j:zoom'] && props['j:zoom'] != 'auto'}">
             <c:set var="zoom" value="${props['j:zoom']}"/>
@@ -51,24 +51,24 @@
         </c:if>
 
     <style>
-        #mapid {
+        #mapid-${uuid} {
             height: ${props['j:height']}px;
             /*  width:
         ${props['j:width']} px;*/
         }
 
-        #mapid img {
+        #mapid-${uuid} img {
             max-width: none;
             min-width: 0px;
             height: auto;
         }
     </style>
 
-    <div id="mapid" class="mt-3"></div>
+    <div id="mapid-${uuid}" class="mt-3"></div>
 
     <script type="text/javascript">
         console.log("${targetProps['j:country']}");
-        var mymap = L.map('mapid').setView([${location}], ${props['j:zoom']});
+        var mymap = L.map('mapid-${uuid}').setView([${location}], ${props['j:zoom']});
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 20,
