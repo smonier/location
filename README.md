@@ -16,6 +16,8 @@ jahia.modules.location.attr.mapbox.token=THE_TOKEN (jahia.properties)
 jahia.modules.location.attr.openWeatherMap.key=THE_KEY (jahia.properties)
 
 
+
+![picture](img/screenshot.png)
 ## Open-Source
 
 This is an Open-Source module, you can find more details about Open-Source @ Jahia [in this repository](https://github.com/Jahia/open-source).
