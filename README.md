@@ -17,7 +17,7 @@ jahia.modules.location.attr.openWeatherMap.key=THE_KEY (jahia.properties)
 
 
 
-![picture](https://github.com/smonier/location/master/img/screenshot.png?raw=true)
+![picture](./src/main/resources/img/screenshot.png)
 ## Open-Source
 
 This is an Open-Source module, you can find more details about Open-Source @ Jahia [in this repository](https://github.com/Jahia/open-source).
